@@ -41,7 +41,7 @@ class HomeController extends \ITECH\Home\Controller\BaseController
         }
 
         // --------- Banner Home
-        $url = $this->config->application->api_url . 'media-list?category_id=' . \ITECH\Data\Lib\Constant::CATEGORY_SLIDE_HOME;
+        $url = $this->config->application->api_url . 'banner-by-id?id=' . parent::$options['slider-home']['value'] . '&authorized_token=' . $authorizedToken;
 
         $cacheName = md5(serialize(array(
             'HomeController',

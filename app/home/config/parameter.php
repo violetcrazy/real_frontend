@@ -39,7 +39,7 @@ $parameter = array(
     'cdn' => array(
         'upload_image_url' => 'http://localhost.cdn.land.com/image/upload',
         'delete_image_url' => 'http://localhost.cdn.land.com/image/delete',
-        'dir_upload' => 'http://localhost.cdn.land.com/asset/frontend/upload/stories/',
+        'dir_upload' => 'http://localhost.cdn.land.com/uploads/',
         'watermark_image_url' => 'http://localhost.cdn.land.com/image/watermark'
     ),
     'asset' => array(
