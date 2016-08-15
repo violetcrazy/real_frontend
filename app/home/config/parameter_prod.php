@@ -36,7 +36,8 @@ $parameter = array(
     'cdn' => array(
         'upload_image_url' => 'http://cdnjinn.codex4u.com/image/upload',
         'delete_image_url' => 'http://cdnjinn.codex4u.com/image/delete',
-        'dir_upload' => 'http://cdnjinn.codex4u.com/asset/frontend/upload/stories/'
+        'dir_upload' => 'http://cdnjinn.codex4u.com/asset/frontend/upload/stories/',
+        'url_upload' => 'http://localhost.cdn.land.com/uploads/'
     ),
     'asset' => array(
         'version' => '20160421_0146',

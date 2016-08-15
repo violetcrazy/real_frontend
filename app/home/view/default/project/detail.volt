@@ -36,7 +36,7 @@
             <div class="wrap-image">
                 <div class="block-map">
                     {% if project['map_view']|length %}
-                        <img src="{{ config.asset.frontend_url ~ 'upload/stories/' ~ project['map_view'][0]['image']}}" usemap="#planetmap" class="map" />
+                        <img src="{{ config.cdn.url_upload ~  project['map_view'][0]['image']}}" usemap="#planetmap" class="map" />
 
                         <map id="map-tag" name="planetmap">
                             {% for key, item in project['map_view'][0]['view_map'] %}
@@ -50,7 +50,7 @@
                         </map>
                     {% else %}
                         {% if project['default_image'] != '' %}
-                            <img src="{{ config.cdn.dir_upload ~ project['default_image']}}">
+                            <img src="{{ config.cdn.url_upload ~ project['default_image']}}">
                         {% else %}
                             <img src="{{ config.asset.frontend_url ~ 'img/noimage.jpg?' ~ config.asset.version }}" />
                         {% endif %}
@@ -59,58 +59,62 @@
             </div>
         </div>
 
+        {% if (project['galleries'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]) %}
+
+                <div class="block-small-gallery flexslider gallery-slide">
+                    <ul class="list list-unstyled slides">
+                        {% for itemImage in project['galleries'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] %}
+                            <li class="item">
+                                <div class="entry">
+                                    <img src="{{ config.cdn.url_upload ~ itemImage['image'] }}" alt="">
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+        {% endif %}
+
         <div class="block-detail">
             <div class="overview">
                 <div class="tab-custom">
                     <div class="tr">
-                        <div class="th">Tổng quan</div>
+                        <div class="th">
+                            <span class="icon-new icon-over"></span> Tổng quan</div>
                         <div class="td">
-                            <div class="line-icon p">
-                                <span class="icon">
-                                    <img src="{{ config.asset.frontend_url }}icon/ic-position.png?"{{ config.asset.version }} />
-                                </span>
-                                <b>Dự án: {{ project['name'] }} - {{ project['province']['name'] }}</b>
+                            <div class="p m-b-20">
+                                <span class="fw-500">Dự án:</span> {{ project['name'] }} - {{ project['province']['name'] }}
+                            </div>
+                            <div class=" p m-b-20">
+                                <span class="fw-500">Số Block/Khu:</span> {{ project['block_count'] }}
                             </div>
 
-                            <div class="row layout-4">
-                                {% if getTrend[project['direction_text']] is defined %}
-                                    <div class="col-xs-3">
-                                        <div class="line-icon p">
-                                            <span class="icon">
-                                                <img src="{{ config.asset.frontend_url }}icon/ic-orientation-black.png?"{{ config.asset.version }} />
-                                            </span>
-                                            <b>{{ getTrend[project['direction_text']] }}</b>
-                                        </div>
-                                    </div>
-                                {% endif %}
-
+                            <div class="row m-b-5">
                                 <div class="col-xs-3">
-                                    <div class="line-icon p">
-                                        <span class="icon">
-                                            <img src="{{ config.asset.frontend_url }}icon/ic-ha.png?{{ config.asset.version }}" />
-                                        </span>
-                                        <b>{{ project['total_area'] }} ha</b>
+                                    <div class=" p">
+                                        <span class="fw-500">Căn hộ</span> {{ currencyFormat(project['apartment_count']) }}
                                     </div>
                                 </div>
 
                                 <div class="col-xs-3">
-                                    <div class="line-icon p">
-                                        <span class="icon">
-                                            <img src="{{ config.asset.frontend_url }}icon/ic-tree.png?{{ config.asset.version }}" />
-                                        </span>
-                                        <b>{{ project['green_area'] }} m<sup>2</sup></b>
+                                    <div class=" p">
+                                        <span class="icon"></span>
+                                        <span class="fw-500">Còn trống</span> {{ currencyFormat(project['apartment_available_count']) }}
                                     </div>
                                 </div>
 
                                 <div class="col-xs-3">
-                                    <div class="line-icon p">
-                                        <span class="icon">
-                                            <img src="{{ config.asset.frontend_url }}icon/ic_Pen House_20px.png?"{{ config.asset.version }} />
-                                        </span>
-                                            <b>{{ project['block_count'] }} blocks</b>
+                                    <div class=" p">
+                                        <span class="icon"></span>
+                                        <span class="fw-500">Đang xử lý:</span> {{ currencyFormat(project['apartment_processing_count']) }}
                                     </div>
                                 </div>
-                                <div class="clearfix"></div>
+
+                                <div class="col-xs-3">
+                                    <div class=" p">
+                                        <span class="icon"></span>
+                                        <span class="fw-500">Đã bán:</span> {{ currencyFormat(project['apartment_sold_count']) }}
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="description">
@@ -131,50 +135,14 @@
                     </div>
 
                     <div class="tr">
-                        <div class="th">Trạng thái</div>
-                        <div class="td">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <div class="line-icon p">
-                                    <span class="icon">
-                                        <img src="{{ config.asset.frontend_url }}icon/ic_Apartment_20px.png?"{{ config.asset.version }} />
-                                    </span>
-                                        <b>Căn hộ: {{ currencyFormat(project['apartment_count']) }}</b>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-3">
-                                    <div class="line-icon p">
-                                        <span class="icon"></span>
-                                        <b>Còn trống: {{ currencyFormat(project['apartment_available_count']) }}</b>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-3">
-                                    <div class="line-icon p">
-                                        <span class="icon"></span>
-                                        <b>Đang xử lý: {{ currencyFormat(project['apartment_processing_count']) }}</b>
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-3">
-                                    <div class="line-icon p">
-                                        <span class="icon"></span>
-                                        <b>Đã bán: {{ currencyFormat(project['apartment_sold_count']) }}</b>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-
-                    <div class="tr">
-                        <div class="th">Các kiểu căn hộ</div>
+                        <div class="th">
+                            <span class="icon-new icon-type"></span>
+                            Các kiểu căn hộ</div>
                         <div class="td clear-p">
                             <div class="row layout-3">
                                 {% for item in project['attribute']['type'] %}
                                     <div class="col-xs-4">
-                                        <div class="line-icon p">
+                                        <div class="line-icon no-icon p">
                                             {{ item['name'] }}
                                         </div>
                                     </div>
@@ -184,12 +152,14 @@
                     </div>
 
                     <div class="tr">
-                        <div class="th">Hướng nhìn</div>
+                        <div class="th">
+                            <span class="icon-new icon-env"></span>
+                            Môi trường sống</div>
                         <div class="td clear-p">
                             <div class="row layout-3">
                                 {% for item in project['attribute']['view'] %}
                                     <div class="col-xs-4">
-                                        <div class="line-icon p">
+                                        <div class="line-icon no-icon p">
                                             {{ item['name'] }}
                                         </div>
                                     </div>
@@ -199,12 +169,14 @@
                     </div>
 
                     <div class="tr">
-                        <div class="th">Tiện ích</div>
+                        <div class="th">
+                            <span class="icon-new icon-util"></span>
+                            Dịch vụ -  Tiện ích</div>
                         <div class="td clear-p">
                             <div class="row layout-3">
                                 {% for item in project['attribute']['utility'] %}
                                     <div class="col-xs-4">
-                                        <div class="line-icon p">
+                                        <div class="line-icon no-icon p">
                                             {{ item['name'] }}
                                         </div>
                                     </div>

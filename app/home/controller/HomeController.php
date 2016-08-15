@@ -51,7 +51,7 @@ class HomeController extends \ITECH\Home\Controller\BaseController
         )));
 
         $bannerHome = $this->cache->get($cacheName);
-        if (!$bannerHome) {
+        if (!$bannerHome || $bannerHome == '') {
             $bannerHome = array();
 
             $r = json_decode(\ITECH\Data\Lib\Util::curlGet($url), true);

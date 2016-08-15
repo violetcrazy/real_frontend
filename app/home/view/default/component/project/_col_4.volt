@@ -12,7 +12,7 @@
             <h3 class="title">{{ _project['name'] }}</h3>
             <div class="des">{{ _project['province']['name'] }}</div>
             <div class="m-t-15">
-                <span class="btn esta-button">Xem chi tiết</span>
+                <span class="btn esta-button dis">Xem chi tiết</span>
             </div>
         </div>
         <div class="caption">
