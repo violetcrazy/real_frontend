@@ -30,7 +30,13 @@
     {% include "default/element/breadcrumbs.volt" %}
 
     <div class="container">
-        <h2 class="title-block title-page">{{ project['name'] }}</h2>
+        <h1 class="title-block title-page">
+            <div class="pull-right tool-view">
+                <a href="" class="map-view">Sơ đồ tổng quan</a>
+                <a href="" class="block-view">Danh sách Block</a>
+            </div>
+            {{ project['name'] }}
+        </h1>
 
         <div class="block-view-map">
             <div class="wrap-image">
