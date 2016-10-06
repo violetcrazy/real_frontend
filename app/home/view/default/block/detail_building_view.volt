@@ -41,28 +41,26 @@
                     <span class="icon">
                         <img src="{{ config.asset.frontend_url }}ic-view-method/ic_Image View_20px.png">
                     </span>
-                    <b>Image View</b>
+                    <b>Hình ảnh phối cảnh</b>
                 </a>
                 <a href="{{ url({ 'for' : 'block_detail', 'slug' : blocks['slug'], 'id' : blocks['id'], 'query' : '?' ~ http_build_query({'type_view': '2'}) }) }}" class="line-icon pull-left">
                     <span class="icon">
                         <img src="{{ config.asset.frontend_url }}ic-view-method/ic_Plan View_20px.png">
                     </span>
-                    <b>Plan view</b>
+                    <b>Sơ đồ</b>
                 </a>
                 <a href="{{ url({ 'for' : 'block_detail', 'slug' : blocks['slug'], 'id' : blocks['id'], 'query' : '?' ~ http_build_query({'type_view': '3'}) }) }}" class="line-icon pull-left active">
                     <span class="icon">
                         <img src="{{ config.asset.frontend_url }}ic-view-method/ic_building map_red_20px-03.png">
                     </span>
-                    <b>Building map</b>
+                    <b>Quỹ căn</b>
                 </a>
-
-                <div class="block-status">
-                    <div class="entry">
-                        <span class="item Available">Còn trống</span>
-                        <span class="item Processing">Đang xử lý</span>
-                        <span class="item Sold">Đã bán</span>
-                    </div>
-                </div>
+                <a href="{{ url({ 'for' : 'block_detail', 'slug' : blocks['slug'], 'id' : blocks['id'], 'query' : '?' ~ http_build_query({'type_view': '4'}) }) }}" class="line-icon pull-left">
+                    <span class="icon">
+                        <img src="{{ config.asset.frontend_url }}ic-view-method/list-block-deactive.png">
+                    </span>
+                    <b>Danh sách sản phẩm</b>
+                </a>
                 <div class="clearfix"></div>
             </div>
 

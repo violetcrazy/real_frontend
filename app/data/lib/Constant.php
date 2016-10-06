@@ -128,6 +128,7 @@ class Constant
     const TYPE_IMAGE_VIEW = 1;
     const TYPE_PLAN_VIEW = 2;
     const TYPE_BUILDING_VIEW = 3;
+    const TYPE_LIST_APARTMENT_VIEW = 4;
 
     const TYPE_UPLOAD_IMAGE_PROJECT_DEFAULT = 1;
     const TYPE_UPLOAD_IMAGE_PROJECT_GALLERY= 2;

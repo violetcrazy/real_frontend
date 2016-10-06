@@ -34,7 +34,20 @@ class ProjectController extends \ITECH\Home\Controller\BaseController
 
             $this->cache->save($cacheName, $project);
         }
-        
+
+        if ($this->request->hasQuery('list') && $this->request->getQuery('list') == 'block') {
+            $url = $this->config->application->api_url . 'block/list-by-project';
+            $get = array(
+                'project_id' => $project['id'],
+                'authorized_token' => $authorizedToken,
+            );
+
+            $block = json_decode(\ITECH\Data\Lib\Util::curlGet($url, $get), true);
+            if ($block['status'] == \ITECH\Data\Lib\Constant::STATUS_CODE_SUCCESS) {
+                $project['blocks'] = $block['result'];
+            }
+        }
+
         $url = $this->config->application->api_url . 'project/other-project';
         $get = [
             'limit' => 10,

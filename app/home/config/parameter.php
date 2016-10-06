@@ -44,7 +44,7 @@ $parameter = array(
         'watermark_image_url' => 'http://localhost.cdn.land.com/image/watermark'
     ),
     'asset' => array(
-        'version' => '20160106_2050',
+        'version' => time(),
         'frontend_url' => 'http://localhost.cdn.land.com/asset/frontend/',
         'backend_url' => 'http://localhost.cdn.land.com/asset/backend/',
         'img_default' => 'http://localhost.cdn.land.com/asset/frontend/img/noimage.jpg',

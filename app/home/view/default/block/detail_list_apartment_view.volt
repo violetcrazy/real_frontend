@@ -7,7 +7,7 @@
 {% block top_js %}
     <script type="text/javascript" src="{{ config.asset.frontend_url ~ 'desktop/version-1.0/template/html_project/asset/js/' }}jquery.maphilight.js?{{ config.asset.version }}"></script>
     <script type="text/javascript" src="{{ config.asset.frontend_url ~ 'desktop/version-1.0/template/html_project/asset/js/' }}jquery.flexslider-min.js?{{ config.asset.version }}"></script>
-    <script type="text/javascript" src="{{ config.asset.frontend_url ~ 'desktop/version-1.0/template/html_project/asset/js/' }}block-plant.js?{{ config.asset.version }}"></script>
+    <script type="text/javascript" src="{{ config.asset.frontend_url ~ 'desktop/version-1.0/template/html_project/asset/js/' }}block.js?{{ config.asset.version }}"></script>
 {%  endblock %}
 
 {% block top_meta %}
@@ -66,9 +66,9 @@
                     <b>Hình ảnh phối cảnh</b>
                 </a>
 
-                <a href="{{ url({ 'for' : 'block_detail', 'slug' : blocks['slug'], 'id' : blocks['id'], 'query' : '?' ~ http_build_query({'type_view': '2'}) }) }}" class="line-icon pull-left  active">
+                <a href="{{ url({ 'for' : 'block_detail', 'slug' : blocks['slug'], 'id' : blocks['id'], 'query' : '?' ~ http_build_query({'type_view': '2'}) }) }}" class="line-icon pull-left">
                     <span class="icon">
-                        <img src="{{ config.asset.frontend_url }}ic-view-method/ic_plan view_red_20px-02.png">
+                        <img src="{{ config.asset.frontend_url }}ic-view-method/ic_Plan View_20px.png">
                     </span>
                     <b>Sơ đồ</b>
                 </a>
@@ -80,73 +80,78 @@
                     <b>Quỹ căn</b>
                 </a>
 
-                <a href="{{ url({ 'for' : 'block_detail', 'slug' : blocks['slug'], 'id' : blocks['id'], 'query' : '?' ~ http_build_query({'type_view': '4'}) }) }}" class="line-icon pull-left">
+                <a href="{{ url({ 'for' : 'block_detail', 'slug' : blocks['slug'], 'id' : blocks['id'], 'query' : '?' ~ http_build_query({'type_view': '4'}) }) }}" class="line-icon pull-left active">
                     <span class="icon">
-                        <img src="{{ config.asset.frontend_url }}ic-view-method/list-block-deactive.png">
+                        <img src="{{ config.asset.frontend_url }}ic-view-method/list-block.png">
                     </span>
                     <b>Danh sách sản phẩm</b>
                 </a>
                 <div class="clearfix"></div>
             </div>
-            <div class="wrap-image flexslider">
-                <ul class="slides">
-                    {% if planView is not empty %}
-                        {% for floorView in planView  %}
-                        <li class="block-map block-view mod-plant">
-                            <img src="{{ config.asset.frontend_url ~ 'upload/block/' ~ floorView['image'] }}" usemap="#planetmap{{ floorView['floor'] }}" class="map">
-                            {% if floorView['map'] is not empty %}
-                                <map id="map-tag" name="planetmap{{ floorView['floor'] }}">
-                                    {% for map in floorView['map'] %}
-                                        <area data-id="{{ map['apartment_id'] }}"
-                                              data-maphilight="{&quot;strokeColor&quot;:&quot;a81f28&quot;,&quot;strokeWidth&quot;:0,&quot;fillColor&quot;:&quot;a81f28&quot;,&quot;fillOpacity&quot;:1}"
-                                              title="{{ map['apartment_name'] }}"
-                                              shape="poly"
-                                              coords="{{ map['coords'] }}">
-                                    {% endfor %}
-                                </map>
-                            {% endif %}
-                        </li>
-                        {% endfor %}
-                    {% endif %}
-                </ul>
-            </div>
-            <div class="footer-bar">
-                <div class="text-center entry">
-                    <span class="item Available">Còn trống</span>
-                    <span class="item Processing">Đang xử lý</span>
-                    <span class="item Sold">Đã bán</span>
-                </div>
+        </div>
+
+        <div class="wrap-list list-style5">
+            <div class="entry">
+                {% for item in list_apartment_block %}
+                    <div class="item">
+                        <div class="thumbnail">
+                            <img src="{{ item['default_image_url'] }}" alt="">
+                        </div>
+                        <div class="summary">
+                            <div class="title">{{ item['name'] }}</div>
+                            <div class="address line-icon">
+                                <span class="icon">
+                                    <img src="{{ img_dir }}icon/ic-location-small.png" />
+                                </span>
+                                {{ item['address'] }}</div>
+                            <div class="attr">
+                                <p class="line-icon">
+                                    <span class="icon">
+                                        <img src="{{ img_dir }}icon/ic-floor-black.png"/>
+                                    </span>
+                                    Tầng: {{ item['floor'] }}
+                                </p>
+                                <p class="line-icon">
+                                    <span class="icon">
+                                        <img src="{{ img_dir }}icon/ic-size-black.png"/>
+                                    </span>
+                                    {{ item['total_area'] }} m<sup>2</sup>
+                                </p>
+                                <p class="line-icon">
+                                    <span class="icon">
+                                        <img src="{{ img_dir }}icon/ic-orientation-black.png"/>
+                                    </span>
+                                    {{ item['direction_text'] }}
+                                </p>
+                                <p class="line-icon">
+                                    <span class="icon">
+                                        <img src="{{ img_dir }}icon/ic_Park_20px.png"/>
+                                    </span>
+                                    {{ item['attributes']['view'][0] is defined ? item['attributes']['view'][0] : '--' }}
+                                </p>
+                                <p class="line-icon">
+                                    <span class="icon"><img src="{{ img_dir }}icon/ic-bed-black.png"/></span>
+                                    {{ item['bedroom_count']  }} Phòng ngủ
+                                </p>
+                                <p class="line-icon">
+                                    <span class="icon"><img src="{{ img_dir }}icon/ic-orientation-black.png"/></span>
+                                    {{ item['bathroom_count']  }} Phòng tắm
+                                </p>
+                            </div>
+
+                            <div class="price">{{ currencyFormat(item['price']) }} <sup>VNĐ</sup></div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
-        {% include 'default/block/_detail_block.volt' %}
+
+        {{ paginationLayout }}
         {% include 'default/block/_other_block.volt' %}
     </div>
-    <script type="text/javascript">
-    $(document).ready(function(){
-        $('area').on('click', function(e){
-            e.preventDefault();
-            var id = $(this).data('id');
-            $('.block-view-map').find('.block-info-popup').remove();
-            $.ajax({
-                url: '{{ url({'for': 'apartment_quick_view'}) }}',
-                data: {id: id},
-                success: function(data){
-                    $('.block-view-map').append(data);
-                    $('.block-view-map').find('.block-info-popup').fadeIn('fast');
-                    $('.slider-popup').flexslider({
-                        animation: "slide",
-                        animationLoop: false,
-                        itemWidth: 111.333,
-                        itemMargin: 0,
-                        minItems: 3,
-                        maxItems: 3,
-                        controlNav: false
-                    });
-                }
+    <pre>
+        {{ dump(list_apartment_block) }}
+    </pre>
 
-            })
-        });
-
-    })
-    </script>
 {% endblock %}

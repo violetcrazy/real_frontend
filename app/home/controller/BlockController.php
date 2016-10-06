@@ -67,6 +67,7 @@ class BlockController extends \ITECH\Home\Controller\BaseController
         ];
         $r = json_decode(\ITECH\Data\Lib\Util::curlGet($url,$get), true);
         $otherBlock = [];
+        $blocks = [];
         if (isset($r['result']) && count($r['result'])) {
             $blocks = $r['result'];
             foreach ($blocks as $key => $item) {
@@ -155,7 +156,13 @@ class BlockController extends \ITECH\Home\Controller\BaseController
             'authorized_token' => $authorizedToken,
             'page' => $page,
         );
+
+        if ($floor_count > 0) {
+            $params['floor_count'] = $floor_count;
+        }
+
         $r = json_decode(\ITECH\Data\Lib\Util::curlGet($url,$params), true);
+
         if (isset($r['result']) && count($r['result'])) {
             $list_apartment_block = $r['result'];
             $total_pages = $r['total_pages'];
@@ -163,7 +170,9 @@ class BlockController extends \ITECH\Home\Controller\BaseController
             $url = $this->url->get(array('for' => 'block_detail', 'slug' => $block['slug'], 'id' => $block['id'] ));
             $query = array(
                 'floor_count' => $floor_count,
-                'type' => $this->request->getQuery('type')
+                'type' => $this->request->getQuery('type'),
+                'type_view' => $this->request->getQuery('type_view'),
+
             );
             $options = array(
                 'url' => $url,
@@ -175,14 +184,6 @@ class BlockController extends \ITECH\Home\Controller\BaseController
                 'total_items' => $total_items
             );
 
-            /*
-            $article_max = $page * $limit;
-            $article_min = $article_max - $limit + 1;
-            if ($article_max > $total_items) {
-                $article_max = $total_items;
-            }
-            */
-
             $layoutComponent = new \ITECH\Home\Component\LayoutComponent();
             $paginationLayout = $layoutComponent->pagination(parent::$theme, $options);
         } else {
@@ -190,6 +191,7 @@ class BlockController extends \ITECH\Home\Controller\BaseController
             $paginationLayout = '';
             $total_items = 0;
         }
+
 
         $this->view->setVars(array(
             'searchBlock' => $searchBlock,
@@ -201,7 +203,7 @@ class BlockController extends \ITECH\Home\Controller\BaseController
             'floor_count' => $floor_count,
             'list_apartment_block' => $list_apartment_block,
             'paginationLayout' => $paginationLayout,
-            'total_items' => $total_items
+            'total_items' => $total_items,
         ));
 
         if (self::$theme == 'mobile') {
@@ -215,6 +217,9 @@ class BlockController extends \ITECH\Home\Controller\BaseController
             }
             if ($type_view == \ITECH\Data\Lib\Constant::TYPE_BUILDING_VIEW) {
                 $this->view->pick(parent::$theme . '/block/detail_building_view');
+            }
+            if ($type_view == \ITECH\Data\Lib\Constant::TYPE_LIST_APARTMENT_VIEW) {
+                $this->view->pick(parent::$theme . '/block/detail_list_apartment_view');
             }
         }
     }

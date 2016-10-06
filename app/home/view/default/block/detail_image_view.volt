@@ -41,43 +41,35 @@
                     <span class="icon">
                         <img src="{{ config.asset.frontend_url }}ic-view-method/ic__image view_red_20px-01.png">
                     </span>
-                    <b>Image View</b>
+                    <b>Hình ảnh phối cảnh</b>
                 </a>
 
                 <a href="{{ url({ 'for' : 'block_detail', 'slug' : blocks['slug'], 'id' : blocks['id'], 'query' : '?' ~ http_build_query({'type_view': '2'}) }) }}" class="line-icon pull-left">
                     <span class="icon">
                         <img src="{{ config.asset.frontend_url }}ic-view-method/ic_Plan View_20px.png">
                     </span>
-                    <b>Plan view</b>
+                    <b>Sơ đồ</b>
                 </a>
 
                 <a href="{{ url({ 'for' : 'block_detail', 'slug' : blocks['slug'], 'id' : blocks['id'], 'query' : '?' ~ http_build_query({'type_view': '3'}) }) }}" class="line-icon pull-left">
                     <span class="icon">
                         <img src="{{ config.asset.frontend_url }}ic-view-method/ic_building map_20px-03.png">
                     </span>
-                    <b>Building map</b>
+                    <b>Quỹ căn</b>
                 </a>
 
-                <div class="block-status">
-                    <div class="entry">
-                        <span class="item Available">Còn trống</span>
-                        <span class="item Processing">Đang xử lý</span>
-                        <span class="item Sold">Đã bán</span>
-                    </div>
-                </div>
+                <a href="{{ url({ 'for' : 'block_detail', 'slug' : blocks['slug'], 'id' : blocks['id'], 'query' : '?' ~ http_build_query({'type_view': '4'}) }) }}" class="line-icon pull-left">
+                    <span class="icon">
+                        <img src="{{ config.asset.frontend_url }}ic-view-method/list-block-deactive.png">
+                    </span>
+                    <b>Danh sách sản phẩm</b>
+                </a>
                 <div class="clearfix"></div>
             </div>
             <div class="wrap-image">
                 <div class="block-map block-view">
                     {% if image_default is not empty %}
-                        <img src="{{ config.asset.frontend_url ~ 'upload/block/' ~ image_default }}" width="947" usemap="#planetmap" class="map">
-                        {% if imageView is not empty %}
-                            <map id="map-tag" name="planetmap">
-                                {% for item in imageView %}
-                                <area data-id="{{ item['apartment_id'] }}" data-maphilight="{&quot;strokeColor&quot;:&quot;a81f28&quot;,&quot;strokeWidth&quot;:0,&quot;fillColor&quot;:&quot;a81f28&quot;,&quot;fillOpacity&quot;:0.75}" title="{{ item['apartment_name'] }}" shape="poly" coords="{{ item['coords'] }}">
-                                {% endfor %}
-                            </map>
-                        {% endif %}
+                        <img src="{{ config.cdn.dir_upload ~ image_default }}" width="947" usemap="#planetmap" class="map">
                     {% endif %}
                 </div>
             </div>
@@ -93,13 +85,13 @@
         {% include 'default/block/_detail_block.volt' %}
         {% include 'default/block/_other_block.volt' %}
     </div>
-    
+
     <script type="text/javascript">
         $(document).ready(function() {
             $('area').on('click', function(e) {
                 e.preventDefault();
                 var id = $(this).data('id');
-                
+
                 $('.block-map').find('.block-info-popup').remove();
                 $.ajax({
                     url: '{{ url({'for': 'apartment_quick_view'}) }}',
