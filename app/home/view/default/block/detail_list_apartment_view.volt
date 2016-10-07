@@ -34,28 +34,6 @@
                 <ul aria-labelledby="type-project" class="dropdown-menu">
                 </ul>
             </div>
-            <div class="pull-right">
-                {% set floor_name_list = blocks['floor_name_list']|json_decode(true) %}
-                <div class="dropdown custom-select select-scroll" id="goto-slide">
-                    <input type="hidden" name="location" value="" />
-                    <button type="button" id="location" data-toggle="dropdown" data-id="{{ blocks['project']['id']  }}" aria-haspopup="true" aria-expanded="false" class="btn btn-default btn-block dropdown-toggle">
-                        <span class="text">
-                            Chọn tầng &#160 &#160 &#160
-                        </span>
-                        <span class="arrow"></span></button>
-                    <ul aria-labelledby="type-project" class="dropdown-menu">
-                        {% if planView is not empty %}
-                            {% for floorView in planView  %}
-                                <li>
-                                    <a href="" data-index="{{ loop.index }}">
-                                        {{ floor_name_list[floorView['floor']] is defined and floor_name_list[floorView['floor']] ? floor_name_list[floorView['floor']] : 'Tầng ' ~ floorView['floor'] }}  &#160 &#160
-                                    </a>
-                                </li>
-                            {% endfor %}
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
         </h2>
         <div class="block-view-map">
             <div class="header">
@@ -95,10 +73,14 @@
                 {% for item in list_apartment_block %}
                     <div class="item">
                         <div class="thumbnail">
-                            <img src="{{ item['default_image_url'] }}" alt="">
+                            <a href="{{ url({'for': 'apartment_detail', 'slug': item['slug'], 'id': item['id'] }) }}">
+                                <img src="{{ item['default_image_url'] }}" alt="">
+                            </a>
                         </div>
                         <div class="summary">
-                            <div class="title">{{ item['name'] }}</div>
+                            <a href="{{ url({'for': 'apartment_detail', 'slug': item['slug'], 'id': item['id'] }) }}">
+                                <div class="title">{{ item['name'] }}</div>
+                            </a>
                             <div class="address line-icon">
                                 <span class="icon">
                                     <img src="{{ img_dir }}icon/ic-location-small.png" />
@@ -144,6 +126,7 @@
                         <div class="clearfix"></div>
                     </div>
                 {% endfor %}
+                <div class="clearfix"></div>
             </div>
         </div>
 

@@ -23,6 +23,8 @@
 {% endblock %}
 
 {% block content %}
+    {% set img_dir = config.asset.frontend_url ~ 'desktop/version-1.0/template/html_project/asset/img/' %}
+
     <div class="container">
         <h2 class="title-block title-page">{{ apartment['name'] }}</h2>
         <div class="row">
@@ -196,7 +198,9 @@
                     {% endif %}
 
                     {% set getTrend = getTrend() %}
-                    <div class="row title-block-apartment">Tổng quan</div>
+                    <div class="row title-block-apartment">
+                        <img style="margin-right: 5px" src="{{ img_dir }}overview.png" alt="">
+                        Tổng quan</div>
                     <div class="entry-content">
                         <div class="description">
                             <div class="short"> {{ niceWordsByChars(apartment['description'], 200) }}...</div>
@@ -207,7 +211,9 @@
                         </div>
                     </div>
 
-                    <div class="row title-block-apartment">Các kiểu căn hộ</div>
+                    <div class="row title-block-apartment">
+                        <img style="margin-right: 5px" src="{{ img_dir }}type.png" alt="">
+                        Các kiểu căn hộ</div>
                     <div class="entry-content">
                         <div class="row layout-3">
                             {% if apartment['attributes']['type'] is defined and apartment['attributes']['type']|length %}
@@ -221,7 +227,9 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="row title-block-apartment">Môi trường sống</div>
+                    <div class="row title-block-apartment">
+                        <img style="margin-right: 5px" src="{{ img_dir }}evn.png" alt="">
+                        Môi trường sống</div>
                     <div class="entry-content">
                         <div class="row layout-3">
                             {% if apartment['attributes']['view'] is defined and apartment['attributes']['view']|length %}
@@ -235,7 +243,9 @@
                             {% endif %}
                         </div>
                     </div>
-                    <div class="row title-block-apartment">Tiện ích</div>
+                    <div class="row title-block-apartment">
+                        <img style="margin-right: 5px" src="{{ img_dir }}uti.png" alt="">
+                        Tiện ích</div>
                     <div class="entry-content">
                         <div class="row layout-3">
                             {% if apartment['attributes']['utility'] is defined and apartment['attributes']['utility']|length %}
