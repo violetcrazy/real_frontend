@@ -133,8 +133,5 @@
         {{ paginationLayout }}
         {% include 'default/block/_other_block.volt' %}
     </div>
-    <pre>
-        {{ dump(list_apartment_block) }}
-    </pre>
 
 {% endblock %}
