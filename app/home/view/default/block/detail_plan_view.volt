@@ -93,7 +93,7 @@
                     {% if planView is not empty %}
                         {% for floorView in planView  %}
                         <li class="block-map block-view mod-plant">
-                            <img src="{{ config.asset.frontend_url ~ 'upload/block/' ~ floorView['image'] }}" usemap="#planetmap{{ floorView['floor'] }}" class="map">
+                            <img src="{{ config.cdn.dir_upload ~ floorView['image'] }}" usemap="#planetmap{{ floorView['floor'] }}" class="map">
                             {% if floorView['map'] is not empty %}
                                 <map id="map-tag" name="planetmap{{ floorView['floor'] }}">
                                     {% for map in floorView['map'] %}

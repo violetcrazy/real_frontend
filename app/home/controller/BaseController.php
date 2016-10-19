@@ -97,7 +97,7 @@ class BaseController extends \Phalcon\Mvc\Controller
             ));
         }
 
-        $url = $this->config->application->api_url . 'option/list?cache=true';
+        $url = $this->config->application->api_url . 'option/list?cache=false';
         $r = json_decode(\ITECH\Data\Lib\Util::curlGet($url), true);
         $options = array();
 
@@ -449,7 +449,7 @@ class BaseController extends \Phalcon\Mvc\Controller
         echo $html;
         exit();
     }
-    
+
     public function getOptionDistrictAction()
     {
         $idProvince = $this->request->getQuery('province_id', array('striptags', 'int'), '');

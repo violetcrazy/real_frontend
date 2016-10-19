@@ -133,16 +133,18 @@ class BlockController extends \ITECH\Home\Controller\BaseController
                 'cache' => 'false',
                 'item_id' => $id,
                 'module' => \ITECH\Data\Lib\Constant::MAP_IMAGE_MODULE_BLOCK,
-                'type' => 2,
+                'type' => 3,
                 'authorized_token' => $authorizedToken
             ];
             $api = $url . '?' . http_build_query($get);
+
             $r = json_decode(\ITECH\Data\Lib\Util::curlGet($url,$get), true);
             if (isset($r['result']) && count($r['result'])) {
                 $planView = $r['result'];
             } else {
                 $planView = '';
             }
+
             $this->view->setVars(array(
                 'planView' => $planView,
             ));
