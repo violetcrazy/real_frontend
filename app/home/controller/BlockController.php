@@ -133,7 +133,7 @@ class BlockController extends \ITECH\Home\Controller\BaseController
                 'cache' => 'false',
                 'item_id' => $id,
                 'module' => \ITECH\Data\Lib\Constant::MAP_IMAGE_MODULE_BLOCK,
-                'type' => 3,
+                'type' => \ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_FLOOR,
                 'authorized_token' => $authorizedToken
             ];
             $api = $url . '?' . http_build_query($get);
