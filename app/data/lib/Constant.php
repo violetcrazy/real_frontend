@@ -189,10 +189,10 @@ class Constant
 
     const SAVE_SEARCH_NOTIFY_DAILY = 1;
     const SAVE_SEARCH_NOTIFY_MONTHLY = 2;
-    
+
     const TEXT_LANGUAGE_VIET = 'vi';
     const TEXT_LANGUAGE_ENG = 'eng';
-    
+
     public static function checkLanguage(){
         $langCurrent = false;
         if (isset($_SESSION['LANGUAGE']) && !empty($_SESSION['LANGUAGE'])) {
