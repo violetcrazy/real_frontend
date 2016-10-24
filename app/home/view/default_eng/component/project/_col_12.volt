@@ -15,7 +15,7 @@
                 <div class="entry2">
                     <div class="key-sale"></div>
                     <h3 class="title-project">{{ _project['name'] }}</h3>
-                    <div class="localtion">{{ _project['province_name'] }}</div>
+                    <div class="localtion">{{ _project['province']['name'] }}</div>
 
                     <div class="action-bottom text-center">
                         <span class="btn esta-button">

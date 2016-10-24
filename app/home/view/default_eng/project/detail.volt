@@ -69,7 +69,7 @@
                                 <span class="icon">
                                     <img src="{{ config.asset.frontend_url }}icon/ic-position.png?"{{ config.asset.version }} />
                                 </span>
-                                <b>Project: {{ project['name_eng'] }} - {{ project['province_name'] }}</b>
+                                <b>Project: {{ project['name_eng'] }} - {{ project['province']['name'] }}</b>
                             </div>
 
                             <div class="row layout-4">
