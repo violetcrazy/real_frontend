@@ -138,7 +138,6 @@
                                         {% endif %}
                                     {% endfor %}
                                 {% endif %}
-
                                 <div class="item">
 
                                     {% if (item['gallery'] is defined and item['gallery']|length > 0) %}
@@ -255,14 +254,6 @@
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
-
-                                {% if key == 2 %}
-                                    <div class="banner-random">
-                                        <a href="">
-                                            <img src="{{ img_dir }}banner/ads-banner.png"/>
-                                        </a>
-                                    </div>
-                                {% endif %}
                             {% endfor %}
                         {% endif %}
                     </div>

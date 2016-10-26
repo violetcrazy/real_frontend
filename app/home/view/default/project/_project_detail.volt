@@ -50,8 +50,34 @@
                     <div class="p m-b-20">
                         <span class="fw-500">Dự án:</span> {{ project['name'] }} - {{ project['province']['name'] }}
                     </div>
-                    <div class=" p m-b-20">
-                        <span class="fw-500">Số Block/Khu:</span> {{ project['block_count'] }}
+
+                    <div class="row m-b-15">
+                        <div class="col-xs-3">
+                            <div class=" p">
+                                <span class="fw-500">Số Block/Khu:</span> {{ project['block_count'] }}
+                            </div>
+                        </div>
+
+                        {#<div class="col-xs-3">#}
+                            {#<div class=" p">#}
+                                {#<span class="icon"></span>#}
+                                {#<span class="fw-500">Còn trống</span> {{ currencyFormat(project['apartment_available_count']) }}#}
+                            {#</div>#}
+                        {#</div>#}
+
+                        {#<div class="col-xs-3">#}
+                            {#<div class=" p">#}
+                                {#<span class="icon"></span>#}
+                                {#<span class="fw-500">Đang xử lý:</span> {{ currencyFormat(project['apartment_processing_count']) }}#}
+                            {#</div>#}
+                        {#</div>#}
+
+                        {#<div class="col-xs-3">#}
+                            {#<div class=" p">#}
+                                {#<span class="icon"></span>#}
+                                {#<span class="fw-500">Đã bán:</span> {{ currencyFormat(project['apartment_sold_count']) }}#}
+                            {#</div>#}
+                        {#</div>#}
                     </div>
 
                     <div class="row m-b-5">
