@@ -14,13 +14,13 @@
 
 {% block content %}
     {% set img_dir = config.asset.frontend_url ~ 'desktop/version-1.0/template/html_project/asset/img/' %}
-    <div class="slider-section">
+    {# <div class="slider-section">
         <div class="wrap-slide slider-home text-center">
             {% if bannerHome is defined and bannerHome['image']|length > 0 %}
                 {% for item in bannerHome['image'] %}
                     {% if item['src'] %}
                         {% if item['link'] != '' %}
-                            <a href="{{ item['link'] }}" title="{{ item['description'] }}"">
+                            <a href="{{ item['link'] }}" title="{{ item['description'] }}">
                                 <img src="{{ item['src'] }}" alt="{{ item['description'] }}">
                             </a>
                         {% else %}
@@ -30,13 +30,13 @@
                 {% endfor %}
             {% endif %}
         </div>
+    </div>
+    #}
         <div class="search-home block-search">
             <div class="container">
                 {{ searchBlock }}
             </div>
         </div>
-    </div>
-
     {{ projectLayout }}
 
     <div class="row-block-apartment">

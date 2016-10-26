@@ -15,7 +15,7 @@
 {% block content %}
     {% set img_dir = config.asset.frontend_url ~ 'desktop/version-1.0/template/html_project/asset/img/' %}
 
-    <div class="slider-section">
+    {#<div class="slider-section">
         <div class="wrap-slide slider-home text-center">
             {% if bannerHome is defined and bannerHome|length %}
                 {% for item in bannerHome %}
@@ -29,6 +29,12 @@
             <div class="container">
                 {{ searchBlock }}
             </div>
+        </div>
+    </div>#}
+
+    <div class="search-home block-search">
+        <div class="container">
+            {{ searchBlock }}
         </div>
     </div>
 

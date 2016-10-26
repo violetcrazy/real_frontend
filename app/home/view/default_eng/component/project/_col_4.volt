@@ -11,7 +11,7 @@
         {% endif %}
         <div class="name-project">
             <h3 class="title">{{ _project['name_eng'] }}</h3>
-            <div class="des">{{ _project['province_name'] }}</div>
+            <div class="des">{{ _project['province']['name'] }}</div>
             <div class="m-t-15">
                 <span class="btn esta-button">View detail</span>
             </div>
@@ -24,8 +24,8 @@
                     </span>
                     <b>
                         {{ _project['address_eng'] is not empty ?  _project['address_eng'] ~ ', ' : '' }}
-                        {{ _project['district_name'] is not empty ? _project['district_name']  ~ ', ' : '' }}
-                        {{ _project['province_name'] is not empty ? _project['province_name'] : '' }}
+                        {{ _project['district']['name'] is not empty ? _project['district']['name']  ~ ', ' : '' }}
+                        {{ _project['province']['name'] is not empty ? _project['province']['name'] : '' }}
                     </b>
                 </div>
                 <hr>

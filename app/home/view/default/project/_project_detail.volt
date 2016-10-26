@@ -25,7 +25,7 @@
     </div>
 </div>
 
-{% if (project['galleries'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]) %}
+{% if project['galleries'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] is defined %}
 
     <div class="block-small-gallery flexslider gallery-slide">
         <ul class="list list-unstyled slides">
