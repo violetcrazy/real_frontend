@@ -33,18 +33,18 @@
                     <div class="header">
                         <a href="{{ url({'for': 'apartment_detail', 'id': apartment['id'], 'slug': apartment['slug'], 'query': '?type=1' }) }}" class="line-icon pull-left {{ request.getQuery('type') == 1 or request.getQuery('type') == null ? 'active' : '' }}">
                             <span class="icon">
-                                <img src="{{ config.asset.frontend_url }}ic-view-method/ic_3D furniture_red_20px-01.png">
+                                <img src="{{ config.asset.frontend_url }}ic-view-method/{{ request.getQuery('type') == 1 ? 'ic_3D furniture_red_20px-01.png' : 'ic_3D Furniture_20px.png' }}">
                             </span>
                             <b>Nội thất 3D</b>
                         </a>
                         <a href="{{ url({'for': 'apartment_detail', 'id': apartment['id'], 'slug': apartment['slug'], 'query': '?type=2' }) }}" class="line-icon pull-left {{ request.getQuery('type') == 2 ? 'active' : '' }}">
                             <span class="icon">
-                                <img src="{{ config.asset.frontend_url }}ic-view-method/ic_building map_20px-03.png">
+                                <img src="{{ config.asset.frontend_url }}ic-view-method/{{ request.getQuery('type') == 2 ? 'ic_building map_red_20px-03.png' : 'ic_building map_20px-03.png' }}">
                             </span><b>Hình tổng thể</b>
                         </a>
                         <a href="{{ url({'for': 'apartment_detail', 'id': apartment['id'], 'slug': apartment['slug'], 'query': '?type=3' }) }}" class="line-icon pull-left {{ request.getQuery('type') == 3 ? 'active' : '' }}">
                             <span class="icon">
-                                <img src="{{ config.asset.frontend_url }}ic-view-method/ic_Plan View_20px.png">
+                                <img src="{{ config.asset.frontend_url }}ic-view-method/{{ request.getQuery('type') == 3 ? 'ic_plan view_red_20px-02.png' : 'ic_Plan View_20px.png' }}">
                             </span>
                             <b>Mặt bằng</b>
                         </a>
@@ -57,46 +57,48 @@
                                 <div class="price">{{ currencyFormat(apartment['price']) }} VND</div>
 
                                 {% if (request.getQuery('type') == 1 or request.getQuery('type') == null) %}
-                                    <div class="caption">
-                                        <div class="pull-left">
-                                            {#
-                                            {% if apartment['images'][4] is defined and apartment['images'][4]|length %}
-                                                {% set i = 0 %}
-                                                {% for album in apartment['images'][4] %}
-                                                    <label data-id="{{ album['id']}}" data-aid="{{ apartment['id']}}" data-url="{{ url({'for': 'load_gallery_ajax'}) }}"  id="modern" class="line {% if i == 0 %}active{% endif %}">
-                                                        <span class="mark"></span>
-                                                        <span class="price-item">{{ album['name']}} - {{ album['price']}} VND</span>
-                                                    </label>
-                                                {% set i = i + 1 %}
-                                                {% endfor %}
-                                            {% endif %}
-                                            #}
-                                        </div>
-                                        {% if apartment['furniture_name'] is not empty %}
-                                            <div class="pull-right">
-                                                <div class="info-contact">
-                                                    <div class="image-logo"><img src="{{ apartment['furniture_logo'] is defined ? config.cdn.dir_upload ~ apartment['furniture_logo'] : 'http://placehold.it/80'}}"></div>
-                                                    <div class="info">
-                                                        <p class="text">Furnished by <br><b>{{ apartment['furniture_name'] }}</b></p>
-                                                        <a data-toggle="modal"
-                                                        data-target="#contact-furniture"
-                                                        aria-hidden="true" data-dismiss="modal"
-                                                        class="btn popup-contact-furniture" style="padding: 0px">
-                                                            Click here to contact >>
-                                                        </a>
+                                    {% if apartment['furniture_name'] is not empty %}
+                                        <div class="caption">
+                                            <div class="pull-left">
+                                                {#
+                                                {% if apartment['images'][4] is defined and apartment['images'][4]|length %}
+                                                    {% set i = 0 %}
+                                                    {% for album in apartment['images'][4] %}
+                                                        <label data-id="{{ album['id']}}" data-aid="{{ apartment['id']}}" data-url="{{ url({'for': 'load_gallery_ajax'}) }}"  id="modern" class="line {% if i == 0 %}active{% endif %}">
+                                                            <span class="mark"></span>
+                                                            <span class="price-item">{{ album['name']}} - {{ album['price']}} VND</span>
+                                                        </label>
+                                                    {% set i = i + 1 %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                                #}
+                                            </div>
+
+                                                <div class="pull-right">
+                                                    <div class="info-contact">
+                                                        <div class="image-logo"><img src="{{ apartment['furniture_logo'] is defined ? config.cdn.dir_upload ~ apartment['furniture_logo'] : 'http://placehold.it/80'}}"></div>
+                                                        <div class="info">
+                                                            <p class="text">Furnished by <br><b>{{ apartment['furniture_name'] }}</b></p>
+                                                            <a data-toggle="modal"
+                                                            data-target="#contact-furniture"
+                                                            aria-hidden="true" data-dismiss="modal"
+                                                            class="btn popup-contact-furniture" style="padding: 0px">
+                                                                Click here to contact >>
+                                                            </a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        {% endif %}
-                                        <div class="clearfix"></div>
-                                    </div>
+
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    {% endif %}
                                 {% endif %}
 
                                 <div id="slider" class="flexslider">
                                     <ul class="slides">
                                         {% if (request.getQuery('type') == 1 or request.getQuery('type') == null) %}
-                                            {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_3D')]['result'] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_3D')]['result']| length %}
-                                                {% for g in apartment['images'][4]['result'] %}
+                                            {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_3D')] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_3D')]| length %}
+                                                {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_3D')] %}
                                                     <li>
                                                         <span class="entry">
                                                             <img src="{{ config.cdn.dir_upload ~ g['image'] }}">
@@ -114,8 +116,8 @@
                                         {% endif %}
 
                                         {% if (request.getQuery('type') == 3) %}
-                                            {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]['result'] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]['result']| length %}
-                                                {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]['result'] %}
+                                            {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]| length %}
+                                                {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] %}
                                                     <li>
                                                         <span class="entry">
                                                             <img src="{{ config.cdn.dir_upload ~ g['image'] }}">
@@ -132,11 +134,11 @@
 
                                     {% if (request.getQuery('type') == 1 or request.getQuery('type') == null) %}
                                         {% if (request.getQuery('type') == 1 or request.getQuery('type') == null) %}
-                                            {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_3D')]['result'] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_3D')]['result']| length %}
-                                                {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_3D')]['result'] %}
+                                            {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_3D')] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_3D')]| length %}
+                                                {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_3D')] %}
                                                     <li>
                                                         <span class="entry">
-                                                            <img src="{{ config.cdn.dir_upload ~ 'thumbnail/' ~ g['image'] }}">
+                                                            <img src="{{ config.cdn.dir_upload ~ g['image'] }}">
                                                         </span>
                                                     </li>
                                                 {% endfor %}
@@ -145,8 +147,8 @@
                                     {% endif %}
 
                                     {% if (request.getQuery('type') == 3) %}
-                                        {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]['result'] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]['result']| length %}
-                                            {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]['result'] %}
+                                        {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]| length %}
+                                            {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] %}
                                                 <li>
                                                     <span class="entry">
                                                         <img src="{{ config.cdn.dir_upload ~ g['image'] }}">
@@ -202,7 +204,7 @@
                         <img style="margin-right: 5px" src="{{ img_dir }}overview.png" alt="">
                         Tổng quan</div>
                     <div class="entry-content">
-                        <div class="description">
+                        <div class="description f16">
                             <div class="short"> {{ niceWordsByChars(apartment['description'], 200) }}...</div>
                             <div class="long">
                                 {{ apartment['description'] }}
@@ -215,7 +217,7 @@
                         <img style="margin-right: 5px" src="{{ img_dir }}type.png" alt="">
                         Các kiểu căn hộ</div>
                     <div class="entry-content">
-                        <div class="row layout-3">
+                        <div class="row layout-3 f16">
                             {% if apartment['attributes']['type'] is defined and apartment['attributes']['type']|length %}
                                 {% for item in apartment['attributes']['type'] %}
                                     <div class="col-xs-4">
@@ -230,23 +232,40 @@
                     <div class="row title-block-apartment">
                         <img style="margin-right: 5px" src="{{ img_dir }}evn.png" alt="">
                         Môi trường sống</div>
-                    <div class="entry-content">
+                    <div class="entry-content f16">
                         <div class="row layout-3">
-                            {% if apartment['attributes']['view'] is defined and apartment['attributes']['view']|length %}
-                                {% for item in apartment['attributes']['view'] %}
-                                    <div class="col-xs-4">
-                                        <b class="text block inner--5">
-                                            {{ item['name'] }}
-                                        </b>
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
+                            <div class="col-xs-6">
+                                <div class="text block inner--5">
+                                    <b>Diện tích: {{ currencyFormat(apartment['total_area']) }} ha</b>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="text block inner--5">
+                                    Hướng nhìn:
+                                    {% if apartment['attributes']['view'] is defined and apartment['attributes']['view']|length %}
+                                        {% for item in apartment['attributes']['view'] %}
+                                            <b>{{ item['name'] }},</b>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="text block inner--5">
+                                    <b>Hướng: {{ apartment['direction_text'] }}</b>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="text block inner--5">
+                                    <b>Diện tích cây xanh: {{ currencyFormat(apartment['green_area']) }} m<sup>2</sup></b>
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                     <div class="row title-block-apartment">
                         <img style="margin-right: 5px" src="{{ img_dir }}uti.png" alt="">
                         Tiện ích</div>
-                    <div class="entry-content">
+                    <div class="entry-content f16">
                         <div class="row layout-3">
                             {% if apartment['attributes']['utility'] is defined and apartment['attributes']['utility']|length %}
                                 {% for item in apartment['attributes']['utility'] %}
@@ -261,7 +280,7 @@
                     </div>
 
                     <div class="title-block-apartment m-t-30">Vị trí</div>
-                    <div class="entry-position">
+                    <div class="entry-position f16">
                         <p>{{ apartment['position']['description'] }}</p><br>
                         <img src="{{ apartment['position']['image'] }}">
                     </div>

@@ -82,13 +82,29 @@
                     Môi trường sống</div>
                 <div class="td clear-p">
                     <div class="row layout-3">
-                        {% for item in blocks['attribute']['view'] %}
-                            <div class="col-xs-4">
-                                <div class="line-icon no-icon p">
-                                    {{ item['name'] }}
-                                </div>
+                        <div class="col-xs-6">
+                            <div class="line-icon no-icon p">
+                                Diện tích: {{ currencyFormat(blocks['total_area']) }} ha
                             </div>
-                        {% endfor %}
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="line-icon no-icon p">
+                                Hướng nhìn:
+                                {% for item in blocks['attribute']['view'] %}
+                                    {{ item['name'] }},
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="line-icon no-icon p">
+                                Hướng: {{ blocks['direction_text'] }}
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="line-icon no-icon p">
+                                Diện tích cây xanh: {{ currencyFormat(blocks['green_area']) }} m<sup>2</sup>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

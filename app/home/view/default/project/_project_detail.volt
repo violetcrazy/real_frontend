@@ -31,9 +31,9 @@
         <ul class="list list-unstyled slides">
             {% for itemImage in project['galleries'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] %}
                 <li class="item">
-                    <div class="entry">
+                    <a class="run-fancybox" rel="gallery1" href="{{ config.cdn.url_upload ~ itemImage['image'] }}" class="entry">
                         <img src="{{ config.cdn.url_upload ~ itemImage['image'] }}" alt="">
-                    </div>
+                    </a>
                 </li>
             {% endfor %}
         </ul>
@@ -57,27 +57,6 @@
                                 <span class="fw-500">Số Block/Khu:</span> {{ project['block_count'] }}
                             </div>
                         </div>
-
-                        {#<div class="col-xs-3">#}
-                            {#<div class=" p">#}
-                                {#<span class="icon"></span>#}
-                                {#<span class="fw-500">Còn trống</span> {{ currencyFormat(project['apartment_available_count']) }}#}
-                            {#</div>#}
-                        {#</div>#}
-
-                        {#<div class="col-xs-3">#}
-                            {#<div class=" p">#}
-                                {#<span class="icon"></span>#}
-                                {#<span class="fw-500">Đang xử lý:</span> {{ currencyFormat(project['apartment_processing_count']) }}#}
-                            {#</div>#}
-                        {#</div>#}
-
-                        {#<div class="col-xs-3">#}
-                            {#<div class=" p">#}
-                                {#<span class="icon"></span>#}
-                                {#<span class="fw-500">Đã bán:</span> {{ currencyFormat(project['apartment_sold_count']) }}#}
-                            {#</div>#}
-                        {#</div>#}
                     </div>
 
                     <div class="row m-b-5">
@@ -149,13 +128,29 @@
                     Môi trường sống</div>
                 <div class="td clear-p">
                     <div class="row layout-3">
-                        {% for item in project['attribute']['view'] %}
-                            <div class="col-xs-4">
-                                <div class="line-icon no-icon p">
-                                    {{ item['name'] }}
-                                </div>
+                        <div class="col-xs-6">
+                            <div class="line-icon no-icon p">
+                                Diện tích: {{ currencyFormat(project['total_area']) }} ha
                             </div>
-                        {% endfor %}
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="line-icon no-icon p">
+                                Hướng nhìn:
+                                {% for item in project['attribute']['view'] %}
+                                    {{ item['name'] }},
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="line-icon no-icon p">
+                                Hướng: {{ project['direction_text'] }}
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <div class="line-icon no-icon p">
+                                Diện tích cây xanh: {{ currencyFormat(project['green_area']) }} m<sup>2</sup>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

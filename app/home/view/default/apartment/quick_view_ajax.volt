@@ -1,3 +1,4 @@
+{% set img_dir = config.asset.frontend_url ~ 'desktop/version-1.0/template/html_project/asset/img/' %}
 
 <div class="block-info-popup"><span class="close"></span>
 <h2 class="title-block">{{ apartment_detail['name']  }}</h2>
@@ -7,15 +8,15 @@
             <h4 class="title">Tổng quan</h4>
 
             <div class="line-icon"><span class="icon"><img src="{{ config.asset.frontend_url }}desktop/version-1.0/template/html_project/asset/img/icon/ic-floor-black.png"/></span>
-                Tầng {{ apartment_detail['floor_count'] is defined ? apartment_detail['floor_count'] : '' }}
+                Tầng {{ apartment_detail['floor'] is defined ? apartment_detail['floor'] : '' }}
                 </div>
 
             <div class="line-icon"><span class="icon"><img src="{{ config.asset.frontend_url }}desktop/version-1.0/template/html_project/asset/img/icon/ic-orientation-black.png"/></span>
-                {{ apartment_detail['trend_value'] is defined ? apartment_detail['trend_value'] : '' }}
+                {{ apartment_detail['direction_text'] }}
             </div>
 
             <div class="line-icon"><span class="icon"><img src="{{ config.asset.frontend_url }}desktop/version-1.0/template/html_project/asset/img/icon/ic-size-black.png"/></span>
-                {{ apartment_detail['space'] is defined ? apartment_detail['space'] ~  'm<sup>2</sup>': '' }}
+                {{ apartment_detail['total_area'] is defined ? currencyFormat(apartment_detail['total_area']) ~  'm<sup>2</sup>': '' }}
             </div>
 
         </div>
@@ -25,50 +26,53 @@
                     {{ apartment_detail['price'] is defined ? currencyFormat(apartment_detail['price']) : '' }} VND
                 </b></div>
             </div>
-            {% if apartment_detail['property_utility'][0] is defined %}
+            {% if apartment_detail['attributes']['view'][0] is defined %}
                 <div class="line-icon">
                     <span class="icon">
-                        <img src="{{ apartment_detail['property_utility'][0]['image_two_url'] }}">
+                        <img src="{{ img_dir }}evn.png">
                     </span>
-                    {{ apartment_detail['property_utility'][0]['name'] }}
+                    {{ apartment_detail['attributes']['view'][0]['name'] }}
                 </div>
             {% endif %}
-            {% if apartment_detail['property_utility'][1] is defined %}
+            {% if apartment_detail['attributes']['view'][1] is defined %}
                 <div class="line-icon">
                     <span class="icon">
-                        <img src="{{ apartment_detail['property_utility'][1]['image_two_url'] }}">
+                        <img src="{{ img_dir }}evn.png">
                     </span>
-                    {{ apartment_detail['property_utility'][1]['name'] }}
+                    {{ apartment_detail['attributes']['view'][1]['name'] }}
                 </div>
             {% endif %}
-            {% if apartment_detail['property_utility'][2] is defined %}
+            {% if apartment_detail['attributes']['view'][2] is defined %}
                 <div class="line-icon">
                     <span class="icon">
-                        <img src="{{ apartment_detail['property_utility'][2]['image_two_url'] }}">
+                        <img src="{{ img_dir }}evn.png">
                     </span>
-                    {{ apartment_detail['property_utility'][2]['name'] }}
+                    {{ apartment_detail['attributes']['view'][2]['name'] }}
                 </div>
             {% endif %}
         </div>
     </div>
     <hr/>
-    {% if (apartment_detail['albums'][0] is defined and apartment_detail['albums'][0]|length) %}
-    <div class="wrap-slider-popup">
-        <div class="flexslider slider-popup">
-            <ul class="slides">
-                {% for item in apartment_detail['albums'][0]['gallery'] %}
-                    <li><a><img src="{{ item['image_thumbnail_url'] }}"/></a></li>
-                {% endfor %}
-            </ul>
+
+    {% if (apartment_detail['images'][2] is defined and apartment_detail['images'][2]|length) %}
+        <div class="wrap-slider-popup">
+            <div class="flexslider slider-popup">
+                <ul class="slides">
+                    {% for item in apartment_detail['images'][2] %}
+                        <li><a><img src="{{ config.cdn.dir_upload ~ item['image'] }}"/></a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-    </div>
     {% endif %}
+
     <div class="des-quick">
         <div class="entry">{{ niceWordsByChars(apartment_detail['description'], 190) }}</div>
         <div class="more-link"><a href="{{ url({'for': 'apartment_detail', 'slug': apartment_detail['slug'], 'id': apartment_detail['id']}) }}" class="link"> [Xem chi tiết]</a></div>
     </div>
 </div>
 </div>
+
 <script type="text/javascript">
 $(document).ready(function(){
     $('img').each(function(){
