@@ -56,6 +56,14 @@
                 </div>
             </div>
         </div>
+
+        <div class="block-policy">
+            <h3 class="title-policy">Chính sách bán hàng</h3>
+            <div class="content-policy">
+                {{ block_detail['policy']|nl2br }}
+            </div>
+        </div>
+
         <div class="link-botom">
             <a href="{{ url({ 'for': 'block_detail', 'slug': block_detail['slug'] , 'id': block_detail['id'] }) }}" class="link">
                 Xem thêm

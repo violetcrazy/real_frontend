@@ -15,9 +15,11 @@
                 {{ apartment_detail['direction_text'] }}
             </div>
 
+            {% if apartment_detail['total_area'] > 0 %}
             <div class="line-icon"><span class="icon"><img src="{{ config.asset.frontend_url }}desktop/version-1.0/template/html_project/asset/img/icon/ic-size-black.png"/></span>
                 {{ apartment_detail['total_area'] is defined ? currencyFormat(apartment_detail['total_area']) ~  'm<sup>2</sup>': '' }}
             </div>
+            {% endif %}
 
         </div>
         <div class="col-xs-6">

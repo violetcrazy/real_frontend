@@ -62,28 +62,28 @@
                     <div class="row m-b-5">
                         <div class="col-xs-3">
                             <div class=" p">
-                                <span class="fw-500">Căn hộ</span> {{ currencyFormat(project['apartment_count']) }}
+                                <span class="fw-500">Căn hộ: </span> {{ currencyFormat(project['apartment_count']) }}
                             </div>
                         </div>
 
                         <div class="col-xs-3">
                             <div class=" p">
                                 <span class="icon"></span>
-                                <span class="fw-500">Còn trống</span> {{ currencyFormat(project['apartment_available_count']) }}
+                                <span class="fw-500">Còn trống: </span> {{ currencyFormat(project['apartment_available_count']) }}
                             </div>
                         </div>
 
                         <div class="col-xs-3">
                             <div class=" p">
                                 <span class="icon"></span>
-                                <span class="fw-500">Đang xử lý:</span> {{ currencyFormat(project['apartment_processing_count']) }}
+                                <span class="fw-500">Đang xử lý: </span> {{ currencyFormat(project['apartment_processing_count']) }}
                             </div>
                         </div>
 
                         <div class="col-xs-3">
                             <div class=" p">
                                 <span class="icon"></span>
-                                <span class="fw-500">Đã bán:</span> {{ currencyFormat(project['apartment_sold_count']) }}
+                                <span class="fw-500">Đã bán: </span> {{ currencyFormat(project['apartment_sold_count']) }}
                             </div>
                         </div>
                     </div>
@@ -128,16 +128,18 @@
                     Môi trường sống</div>
                 <div class="td clear-p">
                     <div class="row layout-3">
-                        <div class="col-xs-6">
-                            <div class="line-icon no-icon p">
-                                Diện tích: {{ currencyFormat(project['total_area']) }} ha
+                        {% if project['total_area'] > 0 %}
+                            <div class="col-xs-6">
+                                <div class="line-icon no-icon p">
+                                        Diện tích: {{ currencyFormat(project['total_area']) }}ha
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                         <div class="col-xs-6">
                             <div class="line-icon no-icon p">
                                 Hướng nhìn:
                                 {% for item in project['attribute']['view'] %}
-                                    {{ item['name'] }},
+                                    {{ loop.index > 1 ? ',' : '' }} {{ item['name'] }}
                                 {% endfor %}
                             </div>
                         </div>
@@ -146,11 +148,13 @@
                                 Hướng: {{ project['direction_text'] }}
                             </div>
                         </div>
-                        <div class="col-xs-6">
-                            <div class="line-icon no-icon p">
-                                Diện tích cây xanh: {{ currencyFormat(project['green_area']) }} m<sup>2</sup>
+                        {% if project['green_area'] > 0 %}
+                            <div class="col-xs-6">
+                                <div class="line-icon no-icon p">
+                                    Diện tích cây xanh: {{ currencyFormat(project['green_area']) }}ha
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -20,7 +20,7 @@ class UserController extends \ITECH\Home\Controller\BaseController
 
         $this->view->pick(parent::$theme . '/user/user_register');
     }
-    
+
     public function userLoginAction()
     {
         if ($this->session->has('USER')) {
@@ -29,7 +29,7 @@ class UserController extends \ITECH\Home\Controller\BaseController
 
         $this->view->pick(parent::$theme . '/user/user_login');
     }
-    
+
     public function agentLoginAction()
     {
         if ($this->session->has('USER')) {
@@ -48,7 +48,7 @@ class UserController extends \ITECH\Home\Controller\BaseController
             'message' => 'Success.',
             'result' => array()
         );
-        
+
         $language = $this->session->get('LANGUAGE');
         if (!$language){
             $language = 'vi';
@@ -333,7 +333,7 @@ class UserController extends \ITECH\Home\Controller\BaseController
             'message' => 'Success.',
             'result' => array()
         );
-        
+
         $language = $this->session->get('LANGUAGE');
         if (!$language){
             $language == 'vi';
@@ -728,13 +728,13 @@ class UserController extends \ITECH\Home\Controller\BaseController
         }
         //var_dump($api); die;
         $url = $this->config->application->api_url . 'message/count-by-id';
-        
+
         $get = [
             'authorized_token' => $authorizedToken,
             'id' => $userSession['id']
         ];
         $countMessageInbox = \ITECH\Data\Lib\Util::curlGet($url, $get);
-        
+
         $get = [
             'authorized_token' => $authorizedToken,
             'created_by' => $userSession['id']
@@ -776,6 +776,7 @@ class UserController extends \ITECH\Home\Controller\BaseController
         $type = $this->request->getQuery('type', array('striptags', 'trim', 'lower'), \ITECH\Data\Lib\Constant::USER_TYPE_AGENT);
         $membership = $this->request->getQuery('membership', array('striptags', 'trim', 'lower'), 'agent');
         $url = $this->config->application->api_url . 'user/list?authorized_token=' . $authorizedToken . '&type=' . $type . '&membership=' . $membership . '&page=' . $page . '&limit=' . $limit;
+
         $r = json_decode(\ITECH\Data\Lib\Util::curlPostJson($url, null), true);
         if ($r['status'] == \ITECH\Data\Lib\Constant::STATUS_CODE_SUCCESS && isset($r['result']['items']) > 0) {
             $listAgent =$r['result'];

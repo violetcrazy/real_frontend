@@ -76,7 +76,7 @@
                                                     <span class="icon">
                                                         <img src="{{ config.asset.frontend_url }}desktop/version-1.0/template/html_project/asset/img/icon/ic-ha.png">
                                                     </span>
-                                                    <b>{{ project['total_area'] is defined and project['total_area'] != '' ? currencyFormat(project['total_area']) ~ 'm<sup>2</sup>' : '--' }} </b>
+                                                    <b>{{ project['total_area'] is defined and project['total_area'] != '' ? currencyFormat(project['total_area']) ~ 'ha' : '--' }} </b>
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
@@ -84,7 +84,7 @@
                                                     <span class="icon">
                                                         <img src="{{ config.asset.frontend_url }}desktop/version-1.0/template/html_project/asset/img/icon/ic-ha.png">
                                                     </span>
-                                                    <b>{{ project['green_area'] is defined and project['green_area'] != '' ? currencyFormat(project['green_area']) ~ 'm<sup>2</sup>' : '--' }} </b>
+                                                    <b>{{ project['green_area'] is defined and project['green_area'] != '' ? currencyFormat(project['green_area']) ~ 'ha' : '--' }} </b>
                                                 </div>
                                                 <div class="line-icon">
                                                     <span class="icon">

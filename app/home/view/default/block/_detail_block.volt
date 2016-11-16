@@ -16,28 +16,28 @@
                     <div class="row m-b-5">
                         <div class="col-xs-3">
                             <div class=" p">
-                                <span class="fw-500">Căn hộ</span> {{ currencyFormat(blocks['apartment_count']) }}
+                                <span class="fw-500">Căn hộ: </span> {{ currencyFormat(blocks['apartment_count']) }}
                             </div>
                         </div>
 
                         <div class="col-xs-3">
                             <div class=" p">
                                 <span class="icon"></span>
-                                <span class="fw-500">Còn trống</span> {{ currencyFormat(blocks['apartment_available_count']) }}
+                                <span class="fw-500">Còn trống: </span> {{ currencyFormat(blocks['apartment_available_count']) }}
                             </div>
                         </div>
 
                         <div class="col-xs-3">
                             <div class=" p">
                                 <span class="icon"></span>
-                                <span class="fw-500">Đang xử lý:</span> {{ currencyFormat(blocks['apartment_processing_count']) }}
+                                <span class="fw-500">Đang xử lý: </span> {{ currencyFormat(blocks['apartment_processing_count']) }}
                             </div>
                         </div>
 
                         <div class="col-xs-3">
                             <div class=" p">
                                 <span class="icon"></span>
-                                <span class="fw-500">Đã bán:</span> {{ currencyFormat(blocks['apartment_sold_count']) }}
+                                <span class="fw-500">Đã bán: </span> {{ currencyFormat(blocks['apartment_sold_count']) }}
                             </div>
                         </div>
                     </div>
@@ -82,16 +82,19 @@
                     Môi trường sống</div>
                 <div class="td clear-p">
                     <div class="row layout-3">
-                        <div class="col-xs-6">
-                            <div class="line-icon no-icon p">
-                                Diện tích: {{ currencyFormat(blocks['total_area']) }} ha
+                        {% if blocks['total_area'] > 0 %}
+                            <div class="col-xs-6">
+                                <div class="line-icon no-icon p">
+                                    Diện tích: {{ currencyFormat(blocks['total_area']) }}m<sup>2</sup>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
+
                         <div class="col-xs-6">
                             <div class="line-icon no-icon p">
                                 Hướng nhìn:
                                 {% for item in blocks['attribute']['view'] %}
-                                    {{ item['name'] }},
+                                    {{ loop.index > 1 ? ',' : '' }} {{ item['name'] }}
                                 {% endfor %}
                             </div>
                         </div>
@@ -100,11 +103,14 @@
                                 Hướng: {{ blocks['direction_text'] }}
                             </div>
                         </div>
-                        <div class="col-xs-6">
-                            <div class="line-icon no-icon p">
-                                Diện tích cây xanh: {{ currencyFormat(blocks['green_area']) }} m<sup>2</sup>
+
+                        {% if blocks['green_area'] > 0 %}
+                            <div class="col-xs-6">
+                                <div class="line-icon no-icon p">
+                                    Diện tích cây xanh: {{ currencyFormat(blocks['green_area']) }}m<sup>2</sup>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

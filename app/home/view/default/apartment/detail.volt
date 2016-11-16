@@ -234,17 +234,19 @@
                         Môi trường sống</div>
                     <div class="entry-content f16">
                         <div class="row layout-3">
+                            {% if apartment['total_area'] > 0 %}
                             <div class="col-xs-6">
                                 <div class="text block inner--5">
-                                    <b>Diện tích: {{ currencyFormat(apartment['total_area']) }} ha</b>
+                                    <b>Diện tích: {{ currencyFormat(apartment['total_area']) }}m<sup>2</sup></b>
                                 </div>
                             </div>
+                            {% endif %}
                             <div class="col-xs-6">
                                 <div class="text block inner--5">
                                     Hướng nhìn:
                                     {% if apartment['attributes']['view'] is defined and apartment['attributes']['view']|length %}
                                         {% for item in apartment['attributes']['view'] %}
-                                            <b>{{ item['name'] }},</b>
+                                            <b>{{ loop.index > 1 ? ',' : '' }} {{ item['name'] }}</b>
                                         {% endfor %}
                                     {% endif %}
                                 </div>
@@ -254,11 +256,14 @@
                                     <b>Hướng: {{ apartment['direction_text'] }}</b>
                                 </div>
                             </div>
+
+                            {% if apartment['green_area'] > 0 %}
                             <div class="col-xs-6">
                                 <div class="text block inner--5">
-                                    <b>Diện tích cây xanh: {{ currencyFormat(apartment['green_area']) }} m<sup>2</sup></b>
+                                    <b>Diện tích cây xanh: {{ currencyFormat(apartment['green_area']) }}m<sup>2</sup></b>
                                 </div>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
 
