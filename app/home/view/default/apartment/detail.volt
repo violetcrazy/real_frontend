@@ -60,18 +60,6 @@
                                     {% if apartment['furniture_name'] is not empty %}
                                         <div class="caption">
                                             <div class="pull-left">
-                                                {#
-                                                {% if apartment['images'][4] is defined and apartment['images'][4]|length %}
-                                                    {% set i = 0 %}
-                                                    {% for album in apartment['images'][4] %}
-                                                        <label data-id="{{ album['id']}}" data-aid="{{ apartment['id']}}" data-url="{{ url({'for': 'load_gallery_ajax'}) }}"  id="modern" class="line {% if i == 0 %}active{% endif %}">
-                                                            <span class="mark"></span>
-                                                            <span class="price-item">{{ album['name']}} - {{ album['price']}} VND</span>
-                                                        </label>
-                                                    {% set i = i + 1 %}
-                                                    {% endfor %}
-                                                {% endif %}
-                                                #}
                                             </div>
 
                                                 <div class="pull-right">
@@ -107,17 +95,22 @@
                                                 {% endfor %}
                                             {% endif %}
                                         {% endif %}
+
                                         {% if (request.getQuery('type') == 2) %}
-                                            <li>
-                                                <span class="entry">
-                                                    <img src="{{ config.cdn.dir_upload ~ apartment['default_image'] }}">
-                                                </span>
-                                            </li>
+                                            {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]| length %}
+                                                {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] %}
+                                                    <li>
+                                                        <span class="entry">
+                                                            <img src="{{ config.cdn.dir_upload ~ g['image'] }}">
+                                                        </span>
+                                                    </li>
+                                                {% endfor %}
+                                            {% endif %}
                                         {% endif %}
 
                                         {% if (request.getQuery('type') == 3) %}
-                                            {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]| length %}
-                                                {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] %}
+                                            {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_FLOOR')] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_FLOOR')]| length %}
+                                                {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_FLOOR')] %}
                                                     <li>
                                                         <span class="entry">
                                                             <img src="{{ config.cdn.dir_upload ~ g['image'] }}">
@@ -146,9 +139,21 @@
                                         {% endif %}
                                     {% endif %}
 
-                                    {% if (request.getQuery('type') == 3) %}
+                                    {% if (request.getQuery('type') == 2) %}
                                         {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')]| length %}
                                             {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_GALLERY')] %}
+                                                <li>
+                                                    <span class="entry">
+                                                        <img src="{{ config.cdn.dir_upload ~ g['image'] }}">
+                                                    </span>
+                                                </li>
+                                            {% endfor %}
+                                        {% endif %}
+                                    {% endif %}
+
+                                    {% if (request.getQuery('type') == 3) %}
+                                        {% if apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_FLOOR')] is defined and  apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_FLOOR')]| length %}
+                                            {% for g in apartment['images'][constant('\ITECH\Data\Lib\Constant::MAP_IMAGE_TYPE_FLOOR')] %}
                                                 <li>
                                                     <span class="entry">
                                                         <img src="{{ config.cdn.dir_upload ~ g['image'] }}">
